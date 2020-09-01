@@ -1,5 +1,5 @@
 <template>
-  <div>首页展示文字</div>
+  <div>12345</div>
 </template>
 
 <script>

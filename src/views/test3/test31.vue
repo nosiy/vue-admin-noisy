@@ -1,5 +1,5 @@
 <template>
-  <div>首页展示文字</div>
+  <div>test31</div>
 </template>
 
 <script>
