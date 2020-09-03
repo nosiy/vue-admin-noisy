@@ -20,5 +20,10 @@ npm run build
 npm run lint
 ```
 
+### Lints and cry
+```
+尝试做出修改
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
