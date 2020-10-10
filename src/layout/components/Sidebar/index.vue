@@ -1,6 +1,6 @@
 <template>
   <div :class="{'has-logo':showLogo}">
-    <!-- <SidebarLogo v-if="showLogo" :collapse="isCollapse" /> -->
+    <sidebar-logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
@@ -16,8 +16,9 @@
         <!-- <sidebar-item
           v-for="route in permission_routes"
           :key="route.path"
-          :routes="route"
+          :item="route"
           :base-path="route.path"
+          class="nest-menu"
         />-->
       </el-menu>
     </el-scrollbar>
@@ -26,13 +27,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-// import SidebarLogo from './SidebarLogo'
+import SidebarLogo from './SidebarLogo'
 import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
 
 export default {
   name: 'Sidebar',
-  components: { SidebarItem },
+  components: { SidebarLogo, SidebarItem },
   computed: {
     ...mapGetters([
       'permission_routes',

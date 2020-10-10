@@ -1,18 +1,54 @@
 const Mock = require('mockjs')
 const { param2Obj } = require('./utils')
 
+const user = require('./user')
 
-const mocks = [];
+const mocks = [
+  ...user
+]
 
-var data = Mock.mock({
-  // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-  'list|1-10': [{
-    // 属性 id 是一个自增数，起始值为 1，每次增 1
-    'id|+1': 1
-  }]
-})
-console.log(data)
+// for front mock
+// please use it cautiously, it will redefine XMLHttpRequest,
+// which will cause many of your third-party libraries to be invalidated(like progress event).
+function mockXHR () {
+  // mock patch
+  // https://github.com/nuysoft/Mock/issues/300
+  Mock.XHR.prototype.proxy_send = Mock.XHR.prototype.send
+  Mock.XHR.prototype.send = function () {
+    if (this.custom.xhr) {
+      this.custom.xhr.withCredentials = this.withCredentials || false
 
-export default {
-  mocks
+      if (this.responseType) {
+        this.custom.xhr.responseType = this.responseType
+      }
+    }
+    this.proxy_send(...arguments)
+  }
+
+  function XHR2ExpressReqWrap (respond) {
+    return function (options) {
+      let result = null
+      if (respond instanceof Function) {
+        const { body, type, url } = options
+        // https://expressjs.com/en/4x/api.html#req
+        result = respond({
+          method: type,
+          body: JSON.parse(body),
+          query: param2Obj(url)
+        })
+      } else {
+        result = respond
+      }
+      return Mock.mock(result)
+    }
+  }
+
+  for (const i of mocks) {
+    Mock.mock(new RegExp(i.url), i.type || 'get', XHR2ExpressReqWrap(i.response))
+  }
+}
+
+module.exports = {
+  mocks,
+  mockXHR
 }

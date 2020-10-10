@@ -58,12 +58,11 @@ router.beforeEach(async (to, from, next) => {
       next()
     } else {
       // 路由添加（调试使用）
-      const accessRoutes = await store.dispatch('generateRoutes', ["admin"])
-      console.log(accessRoutes)
-      router.addRoutes(accessRoutes)
-      next()
+      // const accessRoutes = await store.dispatch('generateRoutes', ["admin"])
+      // router.addRoutes(accessRoutes)
+      // next()
       // 未检测到token时候跳转到登录页
-      // next(`/Login`)
+      next(`/Login`)
       // next({ path: '/Login' })
       NProgress.done()
     }

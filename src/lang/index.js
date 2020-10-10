@@ -9,7 +9,6 @@ const language = {
   en,
   zh
 }
-
 export const i18n = new VueI18n({
   locale: 'zh', // set locale
   fallbackLocale: 'zh',

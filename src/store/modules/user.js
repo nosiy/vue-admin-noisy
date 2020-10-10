@@ -27,25 +27,19 @@ const user = {
     }
   },
   actions: {
-    Login ({ commit }, userInfo) {
+    login ({ commit }, userInfo) {
       const { username, password } = userInfo
-      const params = {
-        username: username.trim(), //去除首尾字符串
-        password: password
-      }
-      // this.$router.push({ 'path': '/' })
-      // return new Promise((resolve, reject) => {
-      //   login(params).then(({ res, err }) => {
-      //     if (res) {
-      //       commit('SET_TOKEN', res.token) //store保存token
-      //       setToken(res.token) //保存最新token，cookie
-      //       resolve()
-      //     } else {
-      //       reject(err)
-      //     }
-      //   })
-      // })
-    }
+      return new Promise((resolve, reject) => {
+        login({ username: username.trim(), password: password }).then(response => {
+          const { data } = response
+          commit('SET_TOKEN', data.token)
+          setToken(data.token)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
   }
 }
 

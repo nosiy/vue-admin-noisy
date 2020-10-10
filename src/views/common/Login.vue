@@ -11,7 +11,12 @@
       <source type="video/mp4" :src="background.video" />
     </video>
     <div class="mask"></div>
-    <el-form ref="FromDate" :model="FromDate" label-width="100px" class="demo-ruleForm">
+    <el-form
+      ref="FromDate"
+      :model="FromDate"
+      label-width="100px"
+      class="demo-ruleForm"
+    >
       <el-form-item prop="username" :rules="validateUsername">
         <i class="icon el-icon-user-solid"></i>
         <el-input
@@ -32,13 +37,17 @@
           @keyup.enter="EnterHandle"
         ></el-input>
         <span
-          :class="[pwdType === 'password' ? 'el-icon-umbrella' : 'el-icon-view']"
+          :class="[
+            pwdType === 'password' ? 'el-icon-umbrella' : 'el-icon-view',
+          ]"
           class="show-pwd"
           @click="showPwd()"
         ></span>
       </el-form-item>
       <el-form-item>
-        <el-button class="btn-login" type="primary" @click="submitForm()">提交</el-button>
+        <el-button class="btn-login" type="primary" @click="submitForm()"
+          >提交</el-button
+        >
       </el-form-item>
       <el-form-item class="login-hint-show">
         <div class="login-hint">
@@ -47,8 +56,9 @@
             type="primary"
             size="mini"
             class="copy-btn"
-            @click="CliPboardLink('admin',$event)"
-          >点击复制</el-button>
+            @click="CliPboardLink('admin', $event)"
+            >点击复制</el-button
+          >
         </div>
         <div class="login-hint">
           <span>密码: admin</span>
@@ -56,8 +66,9 @@
             type="primary"
             size="mini"
             class="copy-btn"
-            @click="CliPboardLink('admin',$event)"
-          >点击复制</el-button>
+            @click="CliPboardLink('admin', $event)"
+            >点击复制</el-button
+          >
         </div>
       </el-form-item>
     </el-form>
@@ -65,7 +76,7 @@
 </template>
 
 <script>
-import Clipboard from './../../utils/clipboard'
+import Clipboard from '@/utils/clipboard'
 // import mock from './../../../mock'
 export default {
   data () {
@@ -106,13 +117,12 @@ export default {
         // console.log(valid, '校验结果')
         if (valid) {
           // this.$router.push('/');
-          this.$store.dispatch('Login', this.FromDate)
-          // console.log(this.FromDate)
-          // this.$store.dispatch('Login', this.FromDate).then(({ res, err }) => {
-          //   console.log('成功')
-          // }).catch(() => {
-          //   console.log('请求失败')
-          // })
+          this.$store.dispatch('login', this.FromDate)
+            .then(() => {
+              // this.$router.push({ path: '/' })
+            })
+            .catch(() => {
+            })
         } else {
           console.log('error submit!!')
           return false

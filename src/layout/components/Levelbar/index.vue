@@ -1,5 +1,9 @@
 <template>
-  <div>12345</div>
+  <div>
+    <div
+      id="levelbar"
+    >123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456123456</div>
+  </div>
 </template>
 
 <script>
@@ -14,4 +18,12 @@ export default {
 </script>
 
 <style lang='scss'>
+#levelbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  // flex-direction: row;
+  justify-content: center;
+  word-break: break-all;
+}
 </style>
