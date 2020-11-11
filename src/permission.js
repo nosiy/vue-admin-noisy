@@ -17,7 +17,6 @@ router.beforeEach(async (to, from, next) => {
 
   // determine whether the user has logged in
   const hasToken = getToken()
-  // console.log(hasToken)
   if (hasToken) {
     if (to.path === '/Login') {
       // if is logged in, redirect to the home page
@@ -30,12 +29,14 @@ router.beforeEach(async (to, from, next) => {
         next()
       } else {
         try {
+
           // get user info
           // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
-          const { roles } = await store.dispatch('user/getInfo')
-
+          // const { roles } = await store.dispatch('user/getInfo')
+          const { roles } = await store.dispatch('getInfo')
           // generate accessible routes map based on roles
-          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          // const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+          const accessRoutes = await store.dispatch('generateRoutes', roles)
 
           // dynamically add accessible routes
           router.addRoutes(accessRoutes)
@@ -45,7 +46,8 @@ router.beforeEach(async (to, from, next) => {
           next({ ...to, replace: true })
         } catch (error) {
           // remove token and go to login page to re-login
-          await store.dispatch('user/resetToken')
+          // await store.dispatch('user/resetToken')
+          await store.dispatch('resetToken')
           Message.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)
           NProgress.done()
@@ -57,10 +59,6 @@ router.beforeEach(async (to, from, next) => {
     if (whiteList.includes(to.path)) {
       next()
     } else {
-      // 路由添加（调试使用）
-      // const accessRoutes = await store.dispatch('generateRoutes', ["admin"])
-      // router.addRoutes(accessRoutes)
-      // next()
       // 未检测到token时候跳转到登录页
       next(`/Login`)
       // next({ path: '/Login' })

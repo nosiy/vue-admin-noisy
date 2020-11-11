@@ -90,7 +90,9 @@ export default {
       FromDate: {
         username: 'admin',
         password: 'admin'
-      }
+      },
+      redirect: undefined,
+      otherQuery: {}
     }
   },
   computed: {
@@ -99,6 +101,17 @@ export default {
     },
     validatePass () {
       return [{ required: this.FromDate.password.length <= 0, message: '密码不能为空' }]
+    }
+  },
+  watch: {
+    $route: {
+      handler: function (route) {
+        const query = route.query
+        if (query) {
+          this.redirect = query.redirect
+          this.otherQuery = this.getOtherQuery(query)
+        }
+      },
     }
   },
   methods: {
@@ -112,27 +125,32 @@ export default {
         this.pwdType = 'password'
       }
     },
+    getOtherQuery (query) {
+      return Object.keys(query).reduce((acc, cur) => {
+        if (cur !== 'redirect') {
+          acc[cur] = query[cur]
+        }
+        return acc
+      }, {})
+    },
     submitForm () {
       this.$refs.FromDate.validate(valid => {
         // console.log(valid, '校验结果')
         if (valid) {
-          // this.$router.push('/');
-          this.$store.dispatch('login', this.FromDate)
-            .then(() => {
-              // this.$router.push({ path: '/' })
-            })
-            .catch(() => {
-            })
+          this.loading = true
+          this.$store.dispatch('login', this.FromDate).then(() => {
+            // console.log('登录')
+            console.log(this.redirect)
+            this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
         } else {
           console.log('error submit!!')
           return false
         }
       })
-      // this.$router.push({ path: '/' })
-      // if (this.FromDate.username === 'admin' && this.FromDate.password === 'admin') {
-      //   console.log(22222222222)
-      //   this.$router.push({ path: '/test1' })
-      // }
     },
     resetForm (formName) {
       this.$refs[formName].resetFields()

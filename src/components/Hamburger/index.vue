@@ -28,6 +28,7 @@ export default {
     toggleClick () {
       this.$emit('toggleClick')
     }
+    
   }
 }
 </script>

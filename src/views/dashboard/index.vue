@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button style="margin-left:50px" @click="logout()">退出登录</button>
     <!-- <EchartsGroup :chart-data="lineChartData" /> -->
   </div>
 </template>
@@ -7,9 +8,9 @@
 <script>
 import echarts from 'echarts';
 // import EchartsGroup from './components/EchartsGroup';
-import { api } from '@/api/home';
+// import { api } from '@/api/home';
 
-console.log({ api })
+// console.log({ api })
 const lineChartData = {
   newVisitis: {
     expectedData: [100, 120, 161, 134, 105, 160, 165],
@@ -37,7 +38,10 @@ export default {
     }
   },
   methods: {
-
+    logout(){
+      this.$store.dispatch('logout')
+      this.$router.push(`/login`)
+    }
   }
 }
 
