@@ -20,7 +20,7 @@
     z-index: 1001;
     overflow: hidden;
 
-    // reset element-ui css
+    /* reset element-ui css */
     .horizontal-collapse-transition {
       transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
     }
@@ -68,7 +68,7 @@
       width: 100% !important;
     }
 
-    // menu hover
+    /* menu hover */
     .submenu-title-noDropdown,
     .el-submenu__title {
       &:hover {
@@ -156,7 +156,7 @@
     min-width: $sideBarWidth !important;
   }
 
-  // mobile responsive
+  /* mobile responsive */
   .mobile {
     .main-container {
       margin-left: 0px;
@@ -185,7 +185,7 @@
   }
 }
 
-// when menu collapsed
+/* when menu collapsed */
 .el-menu--vertical {
   &>.el-menu {
     .svg-icon {
@@ -200,12 +200,11 @@
   .nest-menu .el-submenu>.el-submenu__title,
   .el-menu-item {
     &:hover {
-      // you can use $subMenuHover
+      /* you can use $subMenuHover */
       background-color: $menuHover !important;
     }
   }
-
-  // the scroll bar appears when the subMenu is too long
+  /* the scroll bar appears when the subMenu is too long */
   >.el-menu--popup {
     max-height: 100vh;
     overflow-y: auto;

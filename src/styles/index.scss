@@ -64,19 +64,19 @@ input {
     align-items: center;
     justify-content: center;
 }
-// flex两端对齐，项目之间的间隔都相等。
+/* flex两端对齐，项目之间的间隔都相等。*/
 .flex-between{
     display: flex;
     align-items: center;
     justify-content: space-between;   
 }
-// flex右对齐
+/* flex右对齐*/
 .flex-end{
     display: flex;
     align-items: center;
     justify-content: flex-end;   
 }
-// 向左边靠齐
+/* 向左边靠齐 */
 .flex-align-start{
     display: flex;
     align-items: flex-start;
@@ -85,14 +85,14 @@ input {
 
 
 .overflow-hide{
-    overflow:hidden; //超出的文本隐藏
-    text-overflow:ellipsis; //溢出用省略号显示
-    white-space:nowrap; //溢出不换行
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 .overflow-hide-2{
     overflow: hidden;
     text-overflow: ellipsis;
-    display:-webkit-box; //作为弹性伸缩盒子模型显示。
-    -webkit-box-orient:vertical; //设置伸缩盒子的子元素排列方式--从上到下垂直排列
-    -webkit-line-clamp:2; //显示的行
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
 }

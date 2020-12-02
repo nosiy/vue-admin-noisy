@@ -1,12 +1,14 @@
 <template>
   <div>
-    <button style="margin-left:50px" @click="logout()">退出登录</button>
+    <UploadImg />
+    <el-button style="margin-left:50px" @click="logout()">退出登录</el-button>
     <!-- <EchartsGroup :chart-data="lineChartData" /> -->
   </div>
 </template>
 
 <script>
 import echarts from 'echarts';
+import UploadImg from '@/components/UploadImg';
 // import EchartsGroup from './components/EchartsGroup';
 // import { api } from '@/api/home';
 
@@ -32,13 +34,14 @@ const lineChartData = {
 
 export default {
   name: 'dashboard',
+  components: { UploadImg },
   // components: { EchartsGroup },
   data () {
     return {
     }
   },
   methods: {
-    logout(){
+    logout () {
       this.$store.dispatch('logout')
       this.$router.push(`/login`)
     }

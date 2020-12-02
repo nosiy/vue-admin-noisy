@@ -27,3 +27,11 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+### rem->px change use
+常见屏上显示正常:
+[1280 * 720,
+1366 * 768,
+1440 * 900,
+1920 * 1080]

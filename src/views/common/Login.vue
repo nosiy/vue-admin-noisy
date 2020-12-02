@@ -139,8 +139,6 @@ export default {
         if (valid) {
           this.loading = true
           this.$store.dispatch('login', this.FromDate).then(() => {
-            // console.log('登录')
-            console.log(this.redirect)
             this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
             this.loading = false
           }).catch(() => {
